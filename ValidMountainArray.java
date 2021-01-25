@@ -10,7 +10,7 @@
  arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
  */
 
-class Solution {
+class ValidMountainArray {
     public boolean validMountainArray(int[] arr) {
         // first remove an array based on definition of a mountain array.
         // find the peak
