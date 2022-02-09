@@ -51,15 +51,27 @@ class Result {
     
         int bribes = 0;
         
-        for (int i = q.size() - 1; i >= 0; i--) {
+        int expectedFirst = 1;
+        int expectedSecond = 2;
+        int expectedThird = 3;
+        
+        for (int i = 0; i < q.size(); i++) {
             int sticker = q.get(i);
-            int currentBribes = (i + 1) - sticker;
-            
-            if (currentBribes <= -3){
+
+            if (sticker == expectedFirst) {
+                expectedFirst = expectedSecond;
+                expectedSecond = expectedThird;
+                expectedThird++;
+            } else if (sticker == expectedSecond) {
+                bribes++;
+                expectedSecond = expectedThird;
+                expectedThird++;
+            } else if (sticker == expectedThird) {
+                bribes += 2;
+                expectedThird++;
+            } else {
                 System.out.println("Too chaotic");
                 return;
-            } else if (currentBribes > 0){
-                bribes += currentBribes;
             }
             
         }
