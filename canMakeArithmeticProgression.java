@@ -1,0 +1,52 @@
+/**
+ * taken from: https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/
+ * 
+ */
+
+ // This solution is slow and memory consuming.
+ // There is probably a better way to do it.
+ // I will be looking into it.
+
+class Solution {
+    public boolean canMakeArithmeticProgression(int[] arr) {
+        double aSum = 0;
+        double max = Integer.MIN_VALUE;
+        double min = Integer.MAX_VALUE;
+
+        Set<Double> set = new HashSet<>();
+
+        for(int i = 0; i < arr.length; i++) {
+            int current = arr[i];
+            aSum += current;
+
+            set.add(new Double(current));
+
+            if (current > max) {
+                max = current;
+            }
+
+            if (current < min) {
+                min = current;
+            }
+        }
+
+        double tSum = arr.length * (min + max) / 2.0;
+
+        if (aSum != tSum) {
+            return false;
+        }
+
+        double d = (max - min) / (arr.length - 1.0);
+
+        System.out.println("tSum: " + tSum + " aSum: " + aSum + " min: " + min + " max: " + max + " length: " + arr.length + " diff: " + d);
+
+        for (int i = 0; i < arr.length; i++) {
+            if (!set.contains(min + d * i)) {
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+}
